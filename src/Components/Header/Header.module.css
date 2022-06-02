@@ -1,0 +1,12 @@
+.header {
+  display: inline-flex;
+  padding-left: 10px;
+  color: whitesmoke;
+}
+.title {
+  text-align: center;
+  padding-left: 520px;
+}
+.background {
+  background-color: purple;
+}
