@@ -20,7 +20,7 @@ function App() {
   return (
     <React.Fragment>
       <Header />
-      <Login onLogin={LoginHandler} />
+      <Login />
     </React.Fragment>
   );
 }

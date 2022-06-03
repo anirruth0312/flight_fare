@@ -33,13 +33,13 @@ function Login(props) {
   function validatePassword(event) {
     setEnteredPassword(event.target.value);
   }
-  function submitHandler(event) {
-    event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
-  }
+  // function submitHandler(event) {
+  //   event.preventDefault();
+  //   props.onLogin(enteredEmail, enteredPassword);
+  // }
   return (
     <Card>
-      <form onSubmit={submitHandler}>
+      <form>
         <h1 className={styles.header}>Welcome</h1>
         <label className={styles.label} htmlFor="email">
           Email :{" "}
