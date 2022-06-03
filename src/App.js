@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Components/Login/Login";
-import Header from "./Components/Header/Header";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,14 +11,13 @@ function App() {
     }
   }, []);
 
-  function LoginHandler(email, password) {
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "LOGGED_IN");
-  }
+  // function LoginHandler(email, password) {
+  //   setIsLoggedIn(true);
+  //   localStorage.setItem("isLoggedIn", "LOGGED_IN");
+  // }
 
   return (
     <React.Fragment>
-      <Header />
       <Login />
     </React.Fragment>
   );
