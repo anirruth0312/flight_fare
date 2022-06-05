@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
 import Signup from "./Signup";
-import Header from "../Header/Header";
+import Header from "./Header";
 import Button from "../Button/Button";
 import styles from "./Login.module.css";
 
@@ -38,15 +38,15 @@ function Login(props) {
   function validatePassword(event) {
     setEnteredPassword(event.target.value);
   }
-  // function submitHandler(event) {
-  //   event.preventDefault();
-  //   props.onLogin(enteredEmail, enteredPassword);
-  // }
+  function submitHandler(event) {
+    event.preventDefault();
+    props.onLogin(enteredEmail, enteredPassword);
+  }
   return (
     <React.Fragment>
       <Header />
       <Card>
-        <form>
+        <form onSubmit={submitHandler}>
           <h1 className={styles.header}>Welcome</h1>
           <label className={styles.label} htmlFor="email">
             Email :{" "}
@@ -70,7 +70,12 @@ function Login(props) {
           />
           <br />
           <br />
-          <Button type="submit" text="Login" disabled={!loginValid} />
+          <Button
+            type="submit"
+            text="Login"
+            onClick={props.login}
+            disabled={!loginValid}
+          />
         </form>
         <Signup />
       </Card>
