@@ -1,11 +1,12 @@
 import React from "react";
 import Navigation from "./Navigation";
 import styles from "./FirstPage.module.css";
+import Header from "../Login/Header";
 
 function FirstPage(props) {
   return (
     <header className={styles["main-header"]}>
-      <h1>Website Name</h1>
+      <Header />
       <Navigation
         isLoggedIn={props.isAuthenticated}
         onLogout={props.onLogout}

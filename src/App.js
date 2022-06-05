@@ -25,7 +25,7 @@ function App() {
   return (
     <React.Fragment>
       <FirstPage isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-      <main>{!isLoggedIn && <Login onLogin={loginHandler} />}</main>
+      {!isLoggedIn && <Login onLogin={loginHandler} />}
     </React.Fragment>
   );
 }

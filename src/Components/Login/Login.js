@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../Card/Card";
 import Signup from "./Signup";
 import Header from "./Header";
+import Time from "../Time/Time";
 import Button from "../Button/Button";
 import styles from "./Login.module.css";
 
@@ -44,7 +45,6 @@ function Login(props) {
   }
   return (
     <React.Fragment>
-      <Header />
       <Card>
         <form onSubmit={submitHandler}>
           <h1 className={styles.header}>Welcome</h1>
