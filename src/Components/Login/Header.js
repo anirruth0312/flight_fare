@@ -6,7 +6,7 @@ function Header() {
     <React.Fragment>
       <div className={styles.header}>
         <Time />
-        <h1 className={styles.title}>Title of the website</h1>
+        <h1 className={styles.title}>Phoenix Travels</h1>
       </div>
     </React.Fragment>
   );

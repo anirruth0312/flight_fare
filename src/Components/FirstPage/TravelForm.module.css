@@ -8,3 +8,9 @@
 .head {
   color: #4f005f;
 }
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
