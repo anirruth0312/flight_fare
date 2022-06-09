@@ -32,8 +32,17 @@ function App() {
   }
   return (
     <BrowserRouter>
-      <FirstPage isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-      {!isLoggedIn && <Login onLogin={loginHandler} />}
+      {/* {!isLoggedIn && <Login onLogin={loginHandler} />} */}
+      <Routes>
+        {
+          <Route
+            path="/"
+            element={!isLoggedIn && <Login onLogin={loginHandler} />}
+          ></Route>
+        }
+      </Routes>
+      {<FirstPage isAuthenticated={isLoggedIn} onLogout={logoutHandler} />}
+
       <Routes>{<Route path="/Signup" element={<SignupPage />}></Route>}</Routes>
     </BrowserRouter>
   );

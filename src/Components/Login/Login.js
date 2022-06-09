@@ -86,11 +86,6 @@ function Login(props) {
         <Link to="/Signup">
           <b>Click here to Signup</b>
         </Link>
-        {/* <a href="https://www.youtube.com/">
-          <u>
-            <h3>Click here to signup</h3>
-          </u>
-        </a> */}
       </Card>
     </React.Fragment>
   );

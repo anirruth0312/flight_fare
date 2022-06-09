@@ -19,7 +19,7 @@ const SignupPage = () => {
         />
       </label>
       <br />
-      <label for="password">
+      <label htmlFor="password">
         password
         <input
           value={password}
@@ -27,7 +27,7 @@ const SignupPage = () => {
           name="password"
           type="password"
         />
-        <label for="Confirmpassword">Confirm Password</label>
+        <label htmlFor="Confirmpassword">Confirm Password</label>
         <input
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
