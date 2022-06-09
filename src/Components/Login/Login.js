@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link, Switch } from "react-router-dom";
 import Card from "../Card/Card";
-import Signup from "./Signup";
 import Header from "./Header";
 import Button from "../Button/Button";
 import styles from "./Login.module.css";
@@ -17,14 +17,14 @@ function Login(props) {
     setEnteredEmail(event.target.value);
     setEmailValid(event.target.value.includes("@"));
     setLoginValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 8
+      event.target.value.includes("@") && enteredPassword.trim().length > +8
     );
   }
 
   //Password change and checking if it is valid
   function passwordChangeHandler(event) {
     setEnteredPassword(event.target.value);
-    setPasswordValid(enteredPassword.trim().length > 8);
+    setPasswordValid(enteredPassword.trim().length >= 8);
     setLoginValid(
       event.target.value.trim().length > 8 && enteredEmail.includes("@")
     );
@@ -40,7 +40,15 @@ function Login(props) {
   }
   function submitHandler(event) {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    if (loginValid) {
+      props.onLogin(enteredEmail, enteredPassword);
+      setEnteredEmail("");
+      setEnteredPassword("");
+    } else {
+      if (!passwordValid) {
+        alert("Password must be minimum 8 Characters long");
+      }
+    }
   }
   return (
     <React.Fragment>
@@ -54,6 +62,7 @@ function Login(props) {
           <input
             className={emailValid ? styles.inputvalid : styles.inputerror}
             type="email"
+            value={enteredEmail}
             onChange={emailChangeHandler}
             onBlur={validateEmail}
           />
@@ -65,19 +74,23 @@ function Login(props) {
           <input
             className={passwordValid ? styles.inputvalid : styles.inputerror}
             type="password"
+            value={enteredPassword}
             onChange={passwordChangeHandler}
             onBlur={validatePassword}
           />
           <br />
           <br />
-          <Button
-            type="submit"
-            text="Login"
-            onClick={props.login}
-            disabled={!loginValid}
-          />
+          <Button type="submit" text="Login" onClick={props.login} />
         </form>
-        <Signup />
+        <br />
+        <Link to="/Signup">
+          <b>Click here to Signup</b>
+        </Link>
+        {/* <a href="https://www.youtube.com/">
+          <u>
+            <h3>Click here to signup</h3>
+          </u>
+        </a> */}
       </Card>
     </React.Fragment>
   );
