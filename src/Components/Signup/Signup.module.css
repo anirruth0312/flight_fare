@@ -32,3 +32,18 @@
 .background {
   background-color: purple;
 }
+.errortext {
+  color: #b40e0e;
+}
+
+.invalid {
+  border: 2px solid #b40e0e;
+  background-color: #fddddd;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.invalid :focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
