@@ -8,15 +8,23 @@
   font-weight: bold;
   color: purple;
 }
-.inputerror {
-  background-color: rgb(220, 141, 141);
-  border: 2px solid rgb(77, 5, 5);
-  border-radius: 5px;
-  font-size: 20px;
-}
 .inputvalid {
   background-color: rgb(226, 152, 226);
   border: 2px solid purple;
   border-radius: 5px;
   font-size: 20px;
+}
+.invalid {
+  border: 2px solid #b40e0e;
+  background-color: #fddddd;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.invalid :focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+.errortext {
+  color: #b40e0e;
 }

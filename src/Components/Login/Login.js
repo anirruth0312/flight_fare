@@ -9,47 +9,36 @@ function Login(props) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [loginValid, setLoginValid] = useState(false);
-  const [emailValid, setEmailValid] = useState("");
-  const [passwordValid, setPasswordValid] = useState("");
-
-  //Email change and checking if its valid
-  function emailChangeHandler(event) {
-    setEnteredEmail(event.target.value);
-    setEmailValid(event.target.value.includes("@"));
-    setLoginValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > +8
-    );
-  }
+  const [emailIsTouched, setEmailIsTouched] = useState(false);
 
   //Password change and checking if it is valid
   function passwordChangeHandler(event) {
     setEnteredPassword(event.target.value);
-    setPasswordValid(enteredPassword.trim().length >= 8);
-    setLoginValid(
-      event.target.value.trim().length > 8 && enteredEmail.includes("@")
-    );
+    setLoginValid(enteredEmail.includes("@"));
   }
-
-  //email valiadation
-  function validateEmail(event) {
-    setEnteredEmail(event.target.value);
+  //email validation
+  function emailBlurHandler() {
+    setEmailIsTouched(true);
   }
-  //password validation
-  function validatePassword(event) {
-    setEnteredPassword(event.target.value);
+  function enteredEmailCheckHandler() {
+    if (!emailValid) {
+      return;
+    }
   }
   function submitHandler(event) {
     event.preventDefault();
+    enteredEmailCheckHandler();
     if (loginValid) {
       props.onLogin(enteredEmail, enteredPassword);
       setEnteredEmail("");
       setEnteredPassword("");
-    } else {
-      if (!passwordValid) {
-        alert("Password must be minimum 8 Characters long");
-      }
     }
   }
+  const emailValid =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      enteredEmail.toLowerCase()
+    );
+  const emailisInvalid = !emailValid && emailIsTouched;
   return (
     <React.Fragment>
       <Header />
@@ -57,26 +46,30 @@ function Login(props) {
         <form onSubmit={submitHandler}>
           <h1 className={styles.header}>Welcome</h1>
           <label className={styles.label} htmlFor="email">
-            Email :{" "}
+            Email :
           </label>
           <input
-            className={emailValid ? styles.inputvalid : styles.inputerror}
+            className={emailisInvalid ? styles.invalid : styles.inputvalid}
             type="email"
             value={enteredEmail}
-            onChange={emailChangeHandler}
-            onBlur={validateEmail}
+            onChange={(e) => setEnteredEmail(e.target.value)}
+            onBlur={emailBlurHandler}
           />
           <br />
+          {emailisInvalid && (
+            <p className={styles.errortext}>
+              Please Enter a valid email address
+            </p>
+          )}
           <br />
           <label className={styles.label} htmlFor="password">
-            Password :{" "}
+            Password :
           </label>
           <input
-            className={passwordValid ? styles.inputvalid : styles.inputerror}
+            className={styles.inputvalid}
             type="password"
             value={enteredPassword}
             onChange={passwordChangeHandler}
-            onBlur={validatePassword}
           />
           <br />
           <br />
