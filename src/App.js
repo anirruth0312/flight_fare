@@ -4,7 +4,6 @@ import FirstPage from "./Components/FirstPage/FirstPage";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Routes,
   BrowserRouter,
 } from "react-router-dom";
@@ -32,7 +31,6 @@ function App() {
   }
   return (
     <BrowserRouter>
-      {/* {!isLoggedIn && <Login onLogin={loginHandler} />} */}
       <Routes>
         {
           <Route
@@ -42,7 +40,6 @@ function App() {
         }
       </Routes>
       {<FirstPage isAuthenticated={isLoggedIn} onLogout={logoutHandler} />}
-
       <Routes>{<Route path="/Signup" element={<SignupPage />}></Route>}</Routes>
     </BrowserRouter>
   );

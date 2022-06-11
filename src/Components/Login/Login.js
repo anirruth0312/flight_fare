@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Header from "./Header";
 import Button from "../Button/Button";

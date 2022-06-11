@@ -9,66 +9,58 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [passwordConfirmation, setPasswordConfirmation] = useState("");
   //email checks
-  const [emailValid, setEmailValid] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
   //password checks
-  const [passwordValid, setPasswordValid] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   //confirmpassword checks
-  const [confirmpasswordValid, setConfirmPasswordValid] = useState(false);
   const [confirmpasswordTouched, setConfirmPasswordTouched] = useState(false);
 
-  /*function ValidateEmail() {
-    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(setEmail)) {
-      if (password.trim().length > +8) {
-        setPasswordValid(true);
-      }
-    }
+  const emailValid =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email.toLowerCase()
+    );
+  const passwordValid = password.length >= 8;
+  const confirmPasswordValid = confirmPassword === password;
+  //invalid checks state
+  const emailisInvalid = !emailValid && emailTouched;
+  const passwordisInvalid = !passwordValid && passwordTouched;
+  const confirmpasswordInvalid =
+    !confirmPasswordValid && confirmpasswordTouched;
 
-    if (password.trim().length < +8) {
-      alert("Password must have min 8 characters");
-    } else {
-      alert("You have entered an invalid email address!");
-    }
-    return false;
-  }*/
-
+  function emailBlurHandler() {
+    setEmailTouched(true);
+  }
   function emailCheckHandler() {
-    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)) {
-      setEmailValid(false);
+    if (!emailValid) {
       return;
     }
-    // if (email.trim() === "" || !email.includes("@")) {
-    //   setEmailValid(false);
-    //   return;
-    // }
-    setEmailValid(true);
+  }
+  function passwordBlurHandler() {
+    setConfirmPasswordTouched(true);
+  }
+  function confirmPasswordBlurHandler() {
+    setPasswordTouched(true);
   }
   function passwordCheckHandler() {
-    if (password.trim().length < +8) {
-      setPasswordValid(false);
+    if (!passwordValid) {
       return;
     }
-    setPasswordValid(true);
   }
   function confirmPasswordCheckHandler() {
-    if (confirmPassword.trim() < +8) {
-      setConfirmPasswordValid(false);
+    if (!confirmPasswordValid) {
+      return;
     }
   }
   function submitHandler(event) {
+    event.preventDefault();
     setEmailTouched(true);
     setPasswordTouched(true);
     setConfirmPasswordTouched(true);
-    event.preventDefault();
     emailCheckHandler();
     passwordCheckHandler();
     confirmPasswordCheckHandler();
   }
-  const emailisInvalid = !emailValid && emailTouched;
-  const passwordisInvalid = !passwordValid && passwordTouched;
   return (
     <React.Fragment>
       <Header />
@@ -83,6 +75,7 @@ const SignupPage = () => {
             required
             className={emailisInvalid ? styles.invalid : styles.inputvalid}
             value={email}
+            onBlur={emailBlurHandler}
             onChange={(e) => setEmail(e.target.value)}
             name="email"
             type="email"
@@ -90,7 +83,7 @@ const SignupPage = () => {
           <br />
           {emailisInvalid && (
             <p className={styles.errortext}>
-              You have entered an invalid email address
+              You Have entered an invalid email Address
             </p>
           )}
           <br />
@@ -102,6 +95,7 @@ const SignupPage = () => {
             className={passwordisInvalid ? styles.invalid : styles.inputvalid}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onBlur={passwordBlurHandler}
             name="password"
             type="password"
           />
@@ -119,11 +113,15 @@ const SignupPage = () => {
               className={styles.inputvalid}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onBlur={confirmPasswordBlurHandler}
               name="confirmpassword"
               type="password"
             />
           </label>
           <br />
+          {confirmpasswordInvalid && (
+            <p className={styles.errortext}>Passwords do not match.!</p>
+          )}
           <br />
           <Button type="submit" text="Submit" />
           {signupError && <p style={{ color: "red" }}>{signupError}</p>}
