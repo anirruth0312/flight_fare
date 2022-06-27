@@ -5,7 +5,6 @@ import Button from "../Button/Button";
 import styles from "./Signup.module.css";
 
 const SignupPage = () => {
-  const [signupError, setSignupError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +51,8 @@ const SignupPage = () => {
       return;
     }
   }
-  function submitHandler(event) {
+
+  async function submitHandler(event) {
     event.preventDefault();
     setEmailTouched(true);
     setPasswordTouched(true);
@@ -60,6 +60,23 @@ const SignupPage = () => {
     emailCheckHandler();
     passwordCheckHandler();
     confirmPasswordCheckHandler();
+    const userdata = { emailid: email, password: password };
+    const response = await fetch(
+      "https://react-project-869b5-default-rtdb.firebaseio.com/users.json",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        user: userdata,
+        body: JSON.stringify(userdata),
+      }
+    );
+    if (response) {
+      setEmail("");
+      setEmailTouched(false);
+      setPasswordTouched(false);
+      setConfirmPassword("");
+      setPassword("");
+    }
   }
   return (
     <React.Fragment>
@@ -124,7 +141,6 @@ const SignupPage = () => {
           )}
           <br />
           <Button type="submit" text="Submit" />
-          {signupError && <p style={{ color: "red" }}>{signupError}</p>}
         </form>
       </Card>
     </React.Fragment>
