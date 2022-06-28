@@ -86,8 +86,13 @@ const SignupPage = () => {
         return res.json().then((data) => {
           if (data.error.message === "EMAIL_EXISTS") {
             alert("This user already exists.Please enter a different email ID");
+            setEmailTouched(false);
+            setPasswordTouched(false);
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
           }
-          console.log(data);
+          console.log(data); //checking info
         });
       }
     });
