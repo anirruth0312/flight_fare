@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import Header from "../Login/Header";
 import Button from "../Button/Button";
 import styles from "./Signup.module.css";
 
 const SignupPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +55,7 @@ const SignupPage = () => {
     }
   }
 
-  async function submitHandler(event) {
+  function submitHandler(event) {
     event.preventDefault();
     setEmailTouched(true);
     setPasswordTouched(true);
@@ -60,23 +63,34 @@ const SignupPage = () => {
     emailCheckHandler();
     passwordCheckHandler();
     confirmPasswordCheckHandler();
-    const userdata = { emailid: email, password: password };
-    const response = await fetch(
-      "https://react-project-869b5-default-rtdb.firebaseio.com/users.json",
+    const enteredemail = email;
+    const enteredpassword = password;
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA3Ndaev1upueWiOd1KlFuPsunJuF-ElTM",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        user: userdata,
-        body: JSON.stringify(userdata),
+        body: JSON.stringify({
+          email: enteredemail,
+          password: enteredpassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    );
-    if (response) {
-      setEmail("");
-      setEmailTouched(false);
-      setPasswordTouched(false);
-      setConfirmPassword("");
-      setPassword("");
-    }
+    ).then((res) => {
+      if (res.ok) {
+        alert("Signup Successful");
+        navigate("/", { replace: true });
+      } else {
+        return res.json().then((data) => {
+          if (data.error.message === "EMAIL_EXISTS") {
+            alert("This user already exists.Please enter a different email ID");
+          }
+          console.log(data);
+        });
+      }
+    });
   }
   return (
     <React.Fragment>
