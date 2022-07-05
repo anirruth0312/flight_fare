@@ -4,17 +4,15 @@ import Card from "../Card/Card";
 import Header from "./Header";
 import Button from "../Button/Button";
 import styles from "./Login.module.css";
-
 function Login(props) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [loginValid, setLoginValid] = useState(false);
   const [emailIsTouched, setEmailIsTouched] = useState(false);
-
   //Password change and checking if it is valid
   function passwordChangeHandler(event) {
     setEnteredPassword(event.target.value);
-    setLoginValid(enteredEmail.includes("@"));
+    setLoginValid(enteredEmail.includes("@") && event.target.value.length >= 8);
   }
   //email validation
   function emailBlurHandler() {
@@ -29,9 +27,32 @@ function Login(props) {
     event.preventDefault();
     enteredEmailCheckHandler();
     if (loginValid) {
-      props.onLogin(enteredEmail, enteredPassword);
-      setEnteredEmail("");
-      setEnteredPassword("");
+      fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA3Ndaev1upueWiOd1KlFuPsunJuF-ElTM",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: enteredEmail,
+            password: enteredPassword,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
+        if (res.ok) {
+          props.onLogin(enteredEmail, enteredPassword);
+          setEnteredEmail("");
+          setEmailIsTouched(false);
+          setEnteredPassword("");
+        } else {
+          alert("Invalid username or password");
+        }
+        setEnteredEmail("");
+        setEmailIsTouched(false);
+        setEnteredPassword("");
+      });
     }
   }
   const emailValid =
@@ -70,6 +91,7 @@ function Login(props) {
             type="password"
             value={enteredPassword}
             onChange={passwordChangeHandler}
+            required
           />
           <br />
           <br />

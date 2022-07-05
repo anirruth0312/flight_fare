@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Components/Login/Login";
 import FirstPage from "./Components/FirstPage/FirstPage";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  BrowserRouter,
-} from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignupPage from "./Components/Signup/SignupPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
     const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
     if (storedUserLoggedInInformation === "LOGGEDIN") {
