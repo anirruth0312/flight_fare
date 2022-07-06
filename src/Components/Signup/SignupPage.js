@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import Header from "../Login/Header";
 import Button from "../Button/Button";
@@ -97,6 +97,12 @@ const SignupPage = () => {
       }
     });
   }
+
+  function backtologinHandler() {
+    navigate("/", { replace: true });
+    console.log("sdfsdf");
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -159,7 +165,10 @@ const SignupPage = () => {
             <p className={styles.errortext}>Passwords do not match.!</p>
           )}
           <br />
-          <Button type="submit" text="Submit" />
+          <span className={styles.space}>
+            <Button text="Go to Login" onClick={backtologinHandler} />
+            <Button type="submit" text="Submit" />
+          </span>
         </form>
       </Card>
     </React.Fragment>

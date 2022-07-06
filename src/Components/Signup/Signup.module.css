@@ -47,3 +47,11 @@
   border-color: #ff8800;
   background-color: #fbe8d2;
 }
+
+.space {
+  display: flex;
+  align-items: center;
+  margin-left: 175px;
+  margin-right: 175px;
+  justify-content: space-around;
+}
