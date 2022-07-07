@@ -7,6 +7,13 @@ import TravelForm from "./TravelForm";
 function FirstPage(props) {
   //log used to render component when logged in
   const log = props.isAuthenticated;
+
+  function receiveDataHandler(data) {
+    const source = data.source;
+    const destination = data.destination;
+    const date = data.date;
+  }
+
   return (
     <React.Fragment>
       <header className={styles["main-header"]}>
@@ -16,7 +23,7 @@ function FirstPage(props) {
           onLogout={props.onLogout}
         />
       </header>
-      {log && <TravelForm />}
+      {log && <TravelForm onReceiveData={receiveDataHandler} />}
     </React.Fragment>
   );
 }

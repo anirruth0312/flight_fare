@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import Header from "../Login/Header";
 import Button from "../Button/Button";
