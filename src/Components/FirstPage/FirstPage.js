@@ -12,6 +12,21 @@ function FirstPage(props) {
     const source = data.source;
     const destination = data.destination;
     const date = data.date;
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "7c840213c9mshfd6f771a202b0f2p10271bjsnbb5f04045ba0",
+        "X-RapidAPI-Host": "flight-fare-search.p.rapidapi.com",
+      },
+    };
+
+    fetch(
+      `https://flight-fare-search.p.rapidapi.com/v1/flight/search?from=BLR&to=BOM&date=${date}&currency=INR&type=Economy&adult=1&child=0&infant=0`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
   }
 
   return (
