@@ -3,6 +3,7 @@ import Navigation from "./Navigation";
 import styles from "./FirstPage.module.css";
 import Header from "../Login/Header";
 import TravelForm from "./TravelForm";
+import Time from "../Time/Time";
 
 function FirstPage(props) {
   //log used to render component when logged in
@@ -21,11 +22,20 @@ function FirstPage(props) {
     };
 
     fetch(
-      `https://flight-fare-search.p.rapidapi.com/v1/flight/search?from=BLR&to=BOM&date=${date}&currency=INR&type=Economy&adult=1&child=0&infant=0`,
+      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=BLR&to=BOM&date=${date}&adult=1&type=economy&currency=INR`,
       options
     )
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        //console.log(response);
+        console.log(response.results);
+        let depttime = response.results[0].departureAirport.time;
+        let arrivaltime = response.results[0].arrivalAirport.time;
+        let airline_name = response.results[0].flight_name;
+        let flightcode = response.results[0].flight_code;
+        let duration = response.results[0].duration.text;
+        let price = response.results[0].totals.total;
+      })
       .catch((err) => console.error(err));
   }
 
