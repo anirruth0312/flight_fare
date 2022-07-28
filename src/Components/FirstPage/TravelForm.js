@@ -30,7 +30,7 @@ function TravelForm(props) {
     <div className={styles.box}>
       <TravelCard>
         <form>
-          <h1 className={styles.head}>Book Flights ..!</h1>
+          <h1 className={styles.head}>Search Flights </h1>
           <label className={styles.label} htmlFor="Departure_city">
             From :
           </label>

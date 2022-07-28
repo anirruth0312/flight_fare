@@ -1,0 +1,51 @@
+.container {
+  background-color: whitesmoke;
+  flex-wrap: nowrap;
+  width: 70%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0 0.26);
+  margin: auto;
+  border-radius: 10px;
+  padding: 0.5rem;
+  display: flex;
+}
+.one {
+  width: 130px;
+  margin: 10px;
+  text-align: center;
+}
+.two {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+}
+.three {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+}
+
+.four {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+}
+.five {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.btn {
+  padding: 0.5rem;
+  color: rgb(151, 25, 151);
+  font: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid rgb(151, 25, 151);
+}
+
+.btn:hover {
+  background-color: rgb(151, 25, 151);
+  color: white;
+}

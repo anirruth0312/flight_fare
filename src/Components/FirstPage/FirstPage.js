@@ -27,14 +27,26 @@ function FirstPage(props) {
     )
       .then((response) => response.json())
       .then((response) => {
-        //console.log(response);
         console.log(response.results);
-        let depttime = response.results[0].departureAirport.time;
-        let arrivaltime = response.results[0].arrivalAirport.time;
-        let airline_name = response.results[0].flight_name;
-        let flightcode = response.results[0].flight_code;
-        let duration = response.results[0].duration.text;
-        let price = response.results[0].totals.total;
+        const flight_data = [];
+        for (let i = 0; i < 8; i++) {
+          let depttime = response.results[i].departureAirport.time;
+          let arrivaltime = response.results[i].arrivalAirport.time;
+          let airline_name = response.results[i].flight_name;
+          let flightcode = response.results[i].flight_code;
+          let duration = response.results[i].duration.text;
+          let price = response.results[i].totals.total;
+          const data = {
+            departure_time: depttime,
+            arrival_time: arrivaltime,
+            flight_name: airline_name,
+            flight_code: flightcode,
+            duration: duration,
+            cost: price,
+          };
+          flight_data.push(data);
+        }
+        console.log("HERE ARE THE DETAILS", flight_data);
       })
       .catch((err) => console.error(err));
   }
