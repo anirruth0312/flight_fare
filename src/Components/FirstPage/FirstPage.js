@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import styles from "./FirstPage.module.css";
 import Header from "../Login/Header";
 import TravelForm from "./TravelForm";
-import Time from "../Time/Time";
+import FlightCard from "./FlightCard";
 
 function FirstPage(props) {
   //log used to render component when logged in
@@ -27,17 +27,20 @@ function FirstPage(props) {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.results);
         const flight_data = [];
         for (let i = 0; i < 8; i++) {
           let depttime = response.results[i].departureAirport.time;
+          let departure_airport = response.results[i].departureAirport;
           let arrivaltime = response.results[i].arrivalAirport.time;
+          let arrival_airport = response.results[i].arrivalAirport;
           let airline_name = response.results[i].flight_name;
           let flightcode = response.results[i].flight_code;
           let duration = response.results[i].duration.text;
           let price = response.results[i].totals.total;
           const data = {
+            departure_airport: departure_airport,
             departure_time: depttime,
+            arrival_airport: arrival_airport,
             arrival_time: arrivaltime,
             flight_name: airline_name,
             flight_code: flightcode,
@@ -47,6 +50,9 @@ function FirstPage(props) {
           flight_data.push(data);
         }
         console.log("HERE ARE THE DETAILS", flight_data);
+        flight_data.map((item) => {
+          console.log("Enter");
+        });
       })
       .catch((err) => console.error(err));
   }
