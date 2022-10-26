@@ -6,7 +6,10 @@ import Logo from "./Logo";
 function TravelForm(props) {
   const [source, setSource] = useState();
   const [destination, setDestination] = useState();
-  const [date, setDate] = useState();
+  var curr = new Date();
+  curr.setDate(curr.getDate());
+  var curdate = curr.toISOString().substring(0, 10).toString();
+  const [date, setDate] = useState(curdate);
   function sourceChangeHandler(event) {
     setSource(event.target.value);
   }
@@ -25,9 +28,7 @@ function TravelForm(props) {
     };
     props.onReceiveData(data);
   }
-  var curr = new Date();
-  curr.setDate(curr.getDate());
-  var curdate = curr.toISOString().substring(0, 10).toString();
+
   return (
     <div className={styles.box}>
       <TravelCard>
@@ -60,7 +61,6 @@ function TravelForm(props) {
           </label>
           <input
             className={styles.input}
-            defaultValue={curdate}
             type="date"
             required
             onChange={dateChangeHandler}
