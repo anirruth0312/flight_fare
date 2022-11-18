@@ -9,6 +9,7 @@ function FirstPage(props) {
   const flight_card_final = [];
   const log = props.isAuthenticated;
   const [f, setf] = useState([]);
+  const [fCardData, setfCardData] = useState(null);
   function receiveDataHandler(data) {
     const source = data.source;
     const destination = data.destination;
@@ -27,6 +28,8 @@ function FirstPage(props) {
     )
       .then((response) => response.json())
       .then((response) => {
+        // console.log(response);
+        const data = [];
         for (let i = 0; i < 8; i++) {
           let depttime = response.results[i].departureAirport.time;
           let departure_airport = response.results[i].departureAirport.code;
@@ -36,7 +39,7 @@ function FirstPage(props) {
           let flightcode = response.results[i].flight_code;
           let duration = response.results[i].duration.text;
           let price = response.results[i].totals.total;
-          f.push({
+          data.push({
             departure_airport: departure_airport,
             departure_time: depttime,
             arrival_airport: arrival_airport,
@@ -47,23 +50,24 @@ function FirstPage(props) {
             cost: price,
           });
         }
-        f.forEach((item) => {
-          const fc = (
-            <FlightCard
-              flight_name={item.flight_name}
-              departure_time={item.departure_time}
-              departure_airport={item.departure_airport}
-              arrival_time={item.arrival_time}
-              flight_code={item.flight_code}
-              arrival_airport={item.arrival_airport}
-              duration={item.duration}
-              cost={item.cost}
-            />
-          );
-          flight_card_final.push(fc);
-        });
-        console.log(flight_card_final);
-        console.log("HERE ARE THE DETAILS", f);
+        setfCardData(data);
+        // f.forEach((item) => {
+        //   const fc = (
+        //     <FlightCard
+        //       flight_name={item.flight_name}
+        //       departure_time={item.departure_time}
+        //       departure_airport={item.departure_airport}
+        //       arrival_time={item.arrival_time}
+        //       flight_code={item.flight_code}
+        //       arrival_airport={item.arrival_airport}
+        //       duration={item.duration}
+        //       cost={item.cost}
+        //     />
+        //   );
+        // flight_card_final.push(fc);
+        // });
+        // console.log(flight_card_final);
+        // console.log("HERE ARE THE DETAILS", f);
       })
       .catch((err) => console.error(err));
   }
@@ -78,7 +82,21 @@ function FirstPage(props) {
         />
       </header>
       {log && <TravelForm onReceiveData={receiveDataHandler} />}
-      {log && flight_card_final[0]}
+      {/* {log && flight_card_final[0]} */}
+      {fCardData &&
+        fCardData.map((item, index) => (
+          <FlightCard
+            key={index}
+            flight_name={item.flight_name}
+            departure_time={item.departure_time}
+            departure_airport={item.departure_airport}
+            arrival_time={item.arrival_time}
+            flight_code={item.flight_code}
+            arrival_airport={item.arrival_airport}
+            duration={item.duration}
+            cost={item.cost}
+          />
+        ))}
     </React.Fragment>
   );
 }

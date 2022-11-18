@@ -100,7 +100,7 @@ const SignupPage = () => {
 
   function backtologinHandler() {
     navigate("/", { replace: true });
-    console.log("sdfsdf");
+    console.log("sdfsdf"); 
   }
 
   return (
