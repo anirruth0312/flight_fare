@@ -23,6 +23,7 @@ function FlightCard(props) {
         <h1 style={{ color: "#333333" }}>&#8377; {props.cost}/-</h1>
         <button className={styles.btn}>Book Now</button>
       </div>
+      <br />
     </div>
   );
 }

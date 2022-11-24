@@ -4,15 +4,15 @@ import styles from "./FirstPage.module.css";
 import Header from "../Login/Header";
 import TravelForm from "./TravelForm";
 import FlightCard from "./FlightCard";
+import Loading from "./Loading";
 
 function FirstPage(props) {
-  const flight_card_final = [];
   const log = props.isAuthenticated;
-  const [f, setf] = useState([]);
   const [fCardData, setfCardData] = useState(null);
+  const [loading, setLoading] = useState(false);
   function receiveDataHandler(data) {
-    const source = data.source;
-    const destination = data.destination;
+    // const source = data.source;
+    // const destination = data.destination;
     const date = data.date;
     console.log("this ", data);
     const options = {
@@ -22,6 +22,7 @@ function FirstPage(props) {
         "X-RapidAPI-Host": "flight-fare-search.p.rapidapi.com",
       },
     };
+    setLoading(true);
     fetch(
       `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=BLR&to=BOM&date=${date}&adult=1&type=economy&currency=INR`,
       options
@@ -50,24 +51,9 @@ function FirstPage(props) {
             cost: price,
           });
         }
+        setLoading(false);
+
         setfCardData(data);
-        // f.forEach((item) => {
-        //   const fc = (
-        //     <FlightCard
-        //       flight_name={item.flight_name}
-        //       departure_time={item.departure_time}
-        //       departure_airport={item.departure_airport}
-        //       arrival_time={item.arrival_time}
-        //       flight_code={item.flight_code}
-        //       arrival_airport={item.arrival_airport}
-        //       duration={item.duration}
-        //       cost={item.cost}
-        //     />
-        //   );
-        // flight_card_final.push(fc);
-        // });
-        // console.log(flight_card_final);
-        // console.log("HERE ARE THE DETAILS", f);
       })
       .catch((err) => console.error(err));
   }
@@ -82,19 +68,24 @@ function FirstPage(props) {
         />
       </header>
       {log && <TravelForm onReceiveData={receiveDataHandler} />}
-      {/* {log && flight_card_final[0]} */}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      {loading && <Loading />}
       {fCardData &&
         fCardData.map((item, index) => (
           <FlightCard
             key={index}
             flight_name={item.flight_name}
-            departure_time={item.departure_time}
+            departure_time={item.departure_time.slice(11)}
             departure_airport={item.departure_airport}
-            arrival_time={item.arrival_time}
+            arrival_time={item.arrival_time.slice(11)}
             flight_code={item.flight_code}
             arrival_airport={item.arrival_airport}
             duration={item.duration}
-            cost={item.cost}
+            cost={item.cost.toFixed(2)}
           />
         ))}
     </React.Fragment>
