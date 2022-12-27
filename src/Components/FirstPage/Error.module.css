@@ -1,0 +1,11 @@
+.exitbtn {
+  border-radius: 12px;
+  color: white;
+  background-color: rgb(144, 30, 144);
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}

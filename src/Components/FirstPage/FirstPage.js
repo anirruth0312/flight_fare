@@ -5,14 +5,20 @@ import Header from "../Login/Header";
 import TravelForm from "./TravelForm";
 import FlightCard from "./FlightCard";
 import Loading from "./Loading";
+import Error from "./Error";
 
 function FirstPage(props) {
   const log = props.isAuthenticated;
   const [fCardData, setfCardData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  function timeoutHandler() {
+    setError(true);
+    setLoading(false);
+  }
   function receiveDataHandler(data) {
-    // const source = data.source;
-    // const destination = data.destination;
+    const src = data.source;
+    const dest = data.destination;
     const date = data.date;
     console.log("this ", data);
     const options = {
@@ -24,12 +30,20 @@ function FirstPage(props) {
     };
     setLoading(true);
     fetch(
-      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=BLR&to=BOM&date=${date}&adult=1&type=economy&currency=INR`,
+      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&currency=INR`,
       options
     )
-      .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
+        setTimeout(timeoutHandler, 15000);
+        if (response.ok) {
+          response.json();
+          console.log(response.json());
+        } else {
+          setError(true);
+          throw response;
+        }
+      })
+      .then((response) => {
         const data = [];
         for (let i = 0; i < 8; i++) {
           let depttime = response.results[i].departureAirport.time;
@@ -52,7 +66,6 @@ function FirstPage(props) {
           });
         }
         setLoading(false);
-
         setfCardData(data);
       })
       .catch((err) => console.error(err));
@@ -68,12 +81,8 @@ function FirstPage(props) {
         />
       </header>
       {log && <TravelForm onReceiveData={receiveDataHandler} />}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       {loading && <Loading />}
+      {!loading && error && <Error err={error} />}
       {fCardData &&
         fCardData.map((item, index) => (
           <FlightCard
