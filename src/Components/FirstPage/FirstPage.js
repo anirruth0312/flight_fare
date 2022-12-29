@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navigation from "./Navigation";
 import styles from "./FirstPage.module.css";
 import Header from "../Login/Header";
@@ -20,53 +20,65 @@ function FirstPage(props) {
     const src = data.source;
     const dest = data.destination;
     const date = data.date;
-    console.log("this ", data);
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "7c840213c9mshfd6f771a202b0f2p10271bjsnbb5f04045ba0",
+        "X-RapidAPI-Key": "cb9c9c9385msh713a23764b1a5d8p1a2543jsn7735f9772cf6",
         "X-RapidAPI-Host": "flight-fare-search.p.rapidapi.com",
       },
     };
     setLoading(true);
-    fetch(
+    /*fetch(
       `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&currency=INR`,
       options
     )
       .then((response) => {
         setTimeout(timeoutHandler, 15000);
         if (response.ok) {
-          response.json();
-          console.log(response.json());
+          response.Json();
         } else {
           setError(true);
           throw response;
         }
       })
       .then((response) => {
-        const data = [];
-        for (let i = 0; i < 8; i++) {
-          let depttime = response.results[i].departureAirport.time;
-          let departure_airport = response.results[i].departureAirport.code;
-          let arrivaltime = response.results[i].arrivalAirport.time;
-          let arrival_airport = response.results[i].arrivalAirport.code;
-          let airline_name = response.results[i].flight_name;
-          let flightcode = response.results[i].flight_code;
-          let duration = response.results[i].duration.text;
-          let price = response.results[i].totals.total;
-          data.push({
-            departure_airport: departure_airport,
-            departure_time: depttime,
-            arrival_airport: arrival_airport,
-            arrival_time: arrivaltime,
-            flight_name: airline_name,
-            flight_code: flightcode,
-            duration: duration,
-            cost: price,
-          });
+        console.log(response);
+   */
+    fetch(
+      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&curency=INR`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setTimeout(timeoutHandler, 15000);
+        if (response.status === 200) {
+          const data = [];
+          for (let i = 0; i < 8; i++) {
+            let depttime = response.results[i].departureAirport.time;
+            let departure_airport = response.results[i].departureAirport.code;
+            let arrivaltime = response.results[i].arrivalAirport.time;
+            let arrival_airport = response.results[i].arrivalAirport.code;
+            let airline_name = response.results[i].flight_name;
+            let flightcode = response.results[i].flight_code;
+            let duration = response.results[i].duration.text;
+            let price = response.results[i].totals.total;
+            data.push({
+              departure_airport: departure_airport,
+              departure_time: depttime,
+              arrival_airport: arrival_airport,
+              arrival_time: arrivaltime,
+              flight_name: airline_name,
+              flight_code: flightcode,
+              duration: duration,
+              cost: price,
+            });
+          }
+          setLoading(false);
+          setfCardData(data);
+        } else {
+          console.log(response.status);
         }
-        setLoading(false);
-        setfCardData(data);
       })
       .catch((err) => console.error(err));
   }
