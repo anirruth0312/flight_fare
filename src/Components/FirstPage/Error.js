@@ -6,7 +6,7 @@ function Error(props) {
   }
   return (
     <ErrorCard>
-      <h3>Could not fetch details..</h3>
+      <h3>{props.message}</h3>
       <button className={styles.exitbtn} onClick={returnhandler}>
         Return
       </button>

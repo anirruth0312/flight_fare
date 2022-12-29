@@ -8,6 +8,10 @@ import Loading from "./Loading";
 import Error from "./Error";
 
 function FirstPage(props) {
+  const [errmessage, setErrmessage] = useState(
+    "Could not fetch flight details.."
+  );
+
   const log = props.isAuthenticated;
   const [fCardData, setfCardData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,40 +21,23 @@ function FirstPage(props) {
     setLoading(false);
   }
   function receiveDataHandler(data) {
-    const src = data.source;
-    const dest = data.destination;
+    const src = data.source.toUpperCase();
+    const dest = data.destination.toUpperCase();
     const date = data.date;
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "cb9c9c9385msh713a23764b1a5d8p1a2543jsn7735f9772cf6",
+        "X-RapidAPI-Key": "7c840213c9mshfd6f771a202b0f2p10271bjsnbb5f04045ba0",
         "X-RapidAPI-Host": "flight-fare-search.p.rapidapi.com",
       },
     };
     setLoading(true);
-    /*fetch(
-      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&currency=INR`,
-      options
-    )
-      .then((response) => {
-        setTimeout(timeoutHandler, 15000);
-        if (response.ok) {
-          response.Json();
-        } else {
-          setError(true);
-          throw response;
-        }
-      })
-      .then((response) => {
-        console.log(response);
-   */
     fetch(
-      `https://flight-fare-search.p.rapidapi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&curency=INR`,
+      `https://flight-fare-search.p.rapidApi.com/v2/flight/?from=${src}&to=${dest}&date=${date}&adult=1&type=economy&currency=INR`,
       options
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setTimeout(timeoutHandler, 15000);
         if (response.status === 200) {
           const data = [];
@@ -77,7 +64,9 @@ function FirstPage(props) {
           setLoading(false);
           setfCardData(data);
         } else {
-          console.log(response.status);
+          console.log(response.error);
+          setErrmessage(response.error, "Please Check the entered details.");
+          setError(true);
         }
       })
       .catch((err) => console.error(err));
@@ -94,7 +83,7 @@ function FirstPage(props) {
       </header>
       {log && <TravelForm onReceiveData={receiveDataHandler} />}
       {loading && <Loading />}
-      {!loading && error && <Error err={error} />}
+      {!loading && error && <Error err={error} message={errmessage} />}
       {fCardData &&
         fCardData.map((item, index) => (
           <FlightCard

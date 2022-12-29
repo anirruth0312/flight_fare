@@ -3,15 +3,15 @@ function Logo() {
   return (
     <img
       style={{
-        textAlign: "right",
-        marginTop: "180px",
+        marginTop: "10px",
         position: "relative",
         marginLeft: "200px",
+        borderRadius: "18px",
       }}
       alt="logo"
       src={require("../images/logo.png").default}
-      height="500px"
-      width="600px"
+      height="320px"
+      width="430px"
     />
   );
 }
