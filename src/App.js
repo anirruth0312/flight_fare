@@ -28,7 +28,7 @@ function App() {
       <Routes>
         {
           <Route
-            path="/"
+            path="/flight_fare"
             element={!isLoggedIn && <Login onLogin={loginHandler} />}
           ></Route>
         }
