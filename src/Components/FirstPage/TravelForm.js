@@ -39,6 +39,7 @@ function TravelForm(props) {
           </label>
           <input
             className={styles.input}
+            placeholder="Source airport code"
             type="text"
             required
             onChange={sourceChangeHandler}
@@ -49,6 +50,7 @@ function TravelForm(props) {
             To :
           </label>
           <input
+            placeholder="Destination airport code"
             className={styles.input}
             type="text"
             required

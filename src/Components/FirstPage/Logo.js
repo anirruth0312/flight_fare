@@ -7,6 +7,7 @@ function Logo() {
         position: "relative",
         marginLeft: "200px",
         borderRadius: "18px",
+        zIndex: "-1",
       }}
       alt="logo"
       src={require("../images/logo.png").default}

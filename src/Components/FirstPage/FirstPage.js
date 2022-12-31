@@ -17,7 +17,6 @@ function FirstPage(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   function timeoutHandler() {
-    setError(true);
     setLoading(false);
   }
   function receiveDataHandler(data) {
@@ -38,7 +37,7 @@ function FirstPage(props) {
     )
       .then((response) => response.json())
       .then((response) => {
-        setTimeout(timeoutHandler, 15000);
+        setTimeout(timeoutHandler, 12000);
         if (response.status === 200) {
           const data = [];
           for (let i = 0; i < 8; i++) {
@@ -64,8 +63,7 @@ function FirstPage(props) {
           setLoading(false);
           setfCardData(data);
         } else {
-          console.log(response.error);
-          setErrmessage(response.error, "Please Check the entered details.");
+          setErrmessage(response.error + "Please Check the entered details.");
           setError(true);
         }
       })
