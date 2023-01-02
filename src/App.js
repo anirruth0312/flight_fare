@@ -24,7 +24,7 @@ function App() {
     setIsLoggedIn(false);
   }
   return (
-    <BrowserRouter basename={window.location.pathname || ""}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         {
           <Route
