@@ -24,17 +24,20 @@ function App() {
     setIsLoggedIn(false);
   }
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={window.location.pathname || ""}>
       <Routes>
         {
           <Route
+            exact
             path="/"
             element={!isLoggedIn && <Login onLogin={loginHandler} />}
           ></Route>
         }
       </Routes>
       {<FirstPage isAuthenticated={isLoggedIn} onLogout={logoutHandler} />}
-      <Routes>{<Route path="/Signup" element={<SignupPage />}></Route>}</Routes>
+      <Routes>
+        {<Route exact path="/Signup" element={<SignupPage />}></Route>}
+      </Routes>
     </BrowserRouter>
   );
 }
