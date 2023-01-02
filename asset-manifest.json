@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/flight_fare/static/css/main.a3e2f266.chunk.css",
-    "main.js": "/flight_fare/static/js/main.7e3f704e.chunk.js",
-    "main.js.map": "/flight_fare/static/js/main.7e3f704e.chunk.js.map",
+    "main.js": "/flight_fare/static/js/main.2dd989e0.chunk.js",
+    "main.js.map": "/flight_fare/static/js/main.2dd989e0.chunk.js.map",
     "runtime-main.js": "/flight_fare/static/js/runtime-main.39b40776.js",
     "runtime-main.js.map": "/flight_fare/static/js/runtime-main.39b40776.js.map",
     "static/js/2.7909cd5c.chunk.js": "/flight_fare/static/js/2.7909cd5c.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.39b40776.js",
     "static/js/2.7909cd5c.chunk.js",
     "static/css/main.a3e2f266.chunk.css",
-    "static/js/main.7e3f704e.chunk.js"
+    "static/js/main.2dd989e0.chunk.js"
   ]
 }
