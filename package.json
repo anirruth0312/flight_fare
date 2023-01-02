@@ -2,7 +2,7 @@
   "homepage": "http://anirruth0312.github.io/flight_fare",
   "name": "react-the-complete-guide",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
