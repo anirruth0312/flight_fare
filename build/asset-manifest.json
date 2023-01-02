@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/flight_fare/static/css/main.a3e2f266.chunk.css",
-    "main.js": "/flight_fare/static/js/main.0589913f.chunk.js",
-    "main.js.map": "/flight_fare/static/js/main.0589913f.chunk.js.map",
-    "runtime-main.js": "/flight_fare/static/js/runtime-main.54dcfb89.js",
-    "runtime-main.js.map": "/flight_fare/static/js/runtime-main.54dcfb89.js.map",
-    "static/js/2.c81f2ac0.chunk.js": "/flight_fare/static/js/2.c81f2ac0.chunk.js",
-    "static/js/2.c81f2ac0.chunk.js.map": "/flight_fare/static/js/2.c81f2ac0.chunk.js.map",
+    "main.js": "/flight_fare/static/js/main.7e3f704e.chunk.js",
+    "main.js.map": "/flight_fare/static/js/main.7e3f704e.chunk.js.map",
+    "runtime-main.js": "/flight_fare/static/js/runtime-main.39b40776.js",
+    "runtime-main.js.map": "/flight_fare/static/js/runtime-main.39b40776.js.map",
+    "static/js/2.7909cd5c.chunk.js": "/flight_fare/static/js/2.7909cd5c.chunk.js",
+    "static/js/2.7909cd5c.chunk.js.map": "/flight_fare/static/js/2.7909cd5c.chunk.js.map",
     "index.html": "/flight_fare/index.html",
     "static/css/main.a3e2f266.chunk.css.map": "/flight_fare/static/css/main.a3e2f266.chunk.css.map",
-    "static/js/2.c81f2ac0.chunk.js.LICENSE.txt": "/flight_fare/static/js/2.c81f2ac0.chunk.js.LICENSE.txt"
+    "static/js/2.7909cd5c.chunk.js.LICENSE.txt": "/flight_fare/static/js/2.7909cd5c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.54dcfb89.js",
-    "static/js/2.c81f2ac0.chunk.js",
+    "static/js/runtime-main.39b40776.js",
+    "static/js/2.7909cd5c.chunk.js",
     "static/css/main.a3e2f266.chunk.css",
-    "static/js/main.0589913f.chunk.js"
+    "static/js/main.7e3f704e.chunk.js"
   ]
 }

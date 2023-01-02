@@ -99,7 +99,7 @@ const SignupPage = () => {
   }
 
   function backtologinHandler() {
-    navigate("/flight_fare", { replace: true });
+    navigate("/", { replace: true });
   }
 
   return (
