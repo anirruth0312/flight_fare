@@ -26,7 +26,7 @@ function FirstPage(props) {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "7c840213c9mshfd6f771a202b0f2p10271bjsnbb5f04045ba0",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_APIKEY}`,
         "X-RapidAPI-Host": "flight-fare-search.p.rapidapi.com",
       },
     };
@@ -83,6 +83,7 @@ function FirstPage(props) {
       {loading && <Loading />}
       {!loading && error && <Error err={error} message={errmessage} />}
       {fCardData &&
+        props.isAuthenticated &&
         fCardData.map((item, index) => (
           <FlightCard
             key={index}

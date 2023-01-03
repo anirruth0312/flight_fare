@@ -28,7 +28,7 @@ function Login(props) {
     enteredEmailCheckHandler();
     if (loginValid) {
       fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA3Ndaev1upueWiOd1KlFuPsunJuF-ElTM",
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_LOGINKEY}`,
         {
           method: "POST",
           body: JSON.stringify({

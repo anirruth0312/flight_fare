@@ -66,7 +66,7 @@ const SignupPage = () => {
     const enteredemail = email;
     const enteredpassword = password;
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA3Ndaev1upueWiOd1KlFuPsunJuF-ElTM",
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_LOGINKEY}`,
       {
         method: "POST",
         body: JSON.stringify({

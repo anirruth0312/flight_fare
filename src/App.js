@@ -22,6 +22,7 @@ function App() {
   function logoutHandler() {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
+    window.location.reload();
   }
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
